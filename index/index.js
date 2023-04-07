@@ -4,18 +4,38 @@ const weatherForm = document.querySelector('form');
 const searchEl = document.querySelector('input');
 const loadingEL = document.querySelector('.loading');
 const weatherDiv = document.querySelector('.weather-info');
+const fdegrees = document.querySelector('.f')
+const cdegrees = document.querySelector('.c')
+let degrees = 'temp_f';
 let weatherInfo = {};
 
-weatherForm.addEventListener('submit', function(e)
+weatherForm.addEventListener('submit', sumbitData);
+
+fdegrees.addEventListener('click', () =>
 {
-  hideWeather();
-  getWeatherData(searchEl.value)
-  .then(data => {
-    displayWeather();
-    weatherInfo = data;
-    setWeatherInfo();
-  })
-});
+  const degreeType = 'temp_f'
+
+  if (degrees == degreeType)
+  {
+    return;
+  }
+  degrees = degreeType;
+
+  sumbitData();
+})
+
+cdegrees.addEventListener('click', () =>
+{
+  const degreeType = 'temp_c'
+
+  if (degrees == degreeType)
+  {
+    return;
+  }
+  degrees = degreeType;
+
+  sumbitData();
+})
 
 async function getWeatherData(location)
 {
@@ -38,6 +58,17 @@ async function getWeatherData(location)
   {
     console.log(err);
   }
+}
+
+function sumbitData()
+{
+  hideWeather();
+  getWeatherData(searchEl.value)
+  .then(data => {
+    displayWeather();
+    weatherInfo = data;
+    setWeatherInfo();
+  })
 }
 
 function displayWeather()
@@ -74,7 +105,7 @@ function setWeatherInfo()
   childNodes.img.src = weatherInfo.icon;
   childNodes.condition.textContent = weatherInfo.condition;
   childNodes.location.textContent = weatherInfo.location;
-  childNodes.temp.textContent = weatherInfo.temp_f;
+  childNodes.temp.textContent = weatherInfo[degrees];
   childNodes.time.textContent = weatherInfo.time;
 }
 
