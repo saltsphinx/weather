@@ -1,1 +1,2 @@
 # weather-app
+Project provided by [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-weather-app), it's a simple project meant to put the learner's knowledge of accessing API's, promises and fetch API to the test. Using WeatherAPI, create a simple web page that has a form that the user can enter a location into and get the current weather in their location.
